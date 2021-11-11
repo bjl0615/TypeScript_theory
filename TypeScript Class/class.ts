@@ -12,24 +12,57 @@
 
     Object
         OOP클라스는 개게를 만들어 내기 위한 설계도, 생산틀
- */
+    
+    Constructior(생성자)
+        모든 class는 Consutructor(생성자)를 가짐
+        Constructor(생성자) 는
+        클라스로 부터 객체를 생성할 때,
+        호출되며 "객체의 초기화를 담당"
+
+    Access Modifiers(접근 제한자)
+        클라스 속 멤버 변수 (프로퍼티)와 
+        메소드에 적용될 수 있는 키웓,
+        클라스 외부로 부터의 접근을 통제
+            public , private
+        public 멤버를 노출시키기 위해서 
+        Public 키워드를 명시할 필요 없음 
+
+    Getter & Setter
+        클래스 내에서 멤버변수를 나타내는 fullName앞에서 _(undeerscore)를 넣어준다.
+
+*/
 
 class Employee {
-    fullName!: string;
-    age!: number;
-    jobTitle!: string;
-    hourlyRate!: number;
-    workingHoursPerWeek!: number;
     
+    constructor(    
+        private _fullName:string, 
+        private _age:number, 
+        private _jobTitle:string, 
+        private _hourlyRate:number, 
+        public workingHoursPerWeek:number){
+    }
+
+    /*
+        객체가 생성될 때, 컨스트럭터이 매개변수로 전달된 값은,
+        객체의 프로퍼티 값으로 자동으로 그 값이 초기화 되고 할당됨.
+    */
+
+    get fullName() {
+        return this._fullName;
+    }
+
+    set fullName(value : string) {
+        this._fullName = value;
+    }
+ 
     printEmployeeDetails = () : void => {
-        console.log(`${this.fullName}의 직업은 ${this.jobTitle} 이고 일주일의 수입은 ${this.hourlyRate*this.workingHoursPerWeek} 달러 이다.`)
+        console.log(`${this._fullName}의 직업은 ${this._jobTitle} 이고 
+        일주일의 수입은 ${this._hourlyRate*this.workingHoursPerWeek} 달러 
+        이다.`)
     }
 }
 
-let employee1 = new Employee, {};
-employee1.fullName = '인수';
-employee1.age =28;
-employee1.jobTitle= '주니어 개발자';
-employee1.hourlyRate = 40;
-employee1.workingHoursPerWeek = 35;
-employee1.printEmployeeDetails,{};
+let employee1 = new Employee('민수', 28, '주니어 개발자', 40, 35);
+employee1.fullName = '핸리';
+employee1.printEmployeeDetails();
+let employee2 = new Employee('미나', 32, '프로젝트 매니저', 55, 30);
