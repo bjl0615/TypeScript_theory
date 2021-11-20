@@ -1,3 +1,12 @@
+// 라이브러리 로딩
+// import 변수명 from '라이브러리 이름'
+// 변수, 함수 임포트 문법
+// import {} from '파일 상대 경로';
+import axios, { AxiosResponse } from 'axios';
+import * as Chart from 'chart.js';
+//타입 모듈
+import { CountrySummaryResponse, CovideSummaryResonse } from './covid/index';
+
 // utils
 function $(selector: string) {
   return document.querySelector(selector);
@@ -7,6 +16,7 @@ function getUnixTimestamp(date: Date) {
 }
 
 // DOM
+// let a: Element | HTMLElement | HTMLParamElement;
 const confirmedTotal = $('.confirmed-total') as HTMLSpanElement;
 const deathsTotal = $('.deaths') as HTMLParagraphElement;
 const recoveredTotal = $('.recovered') as HTMLParagraphElement;
@@ -37,7 +47,7 @@ let isDeathLoading = false;
 const isRecoveredLoading = false;
 
 // api
-function fetchCovidSummary() {
+function fetchCovidSummary(): Promise<AxiosResponse<CovideSummaryResonse>> {
   const url = 'https://api.covid19api.com/summary';
   return axios.get(url);
 }
@@ -48,7 +58,10 @@ enum CovidStatus {
   Deaths = 'deaths',
 }
 
-function fetchCountryInfo(countryCode: string, status: CovidStatus) {
+function fetchCountryInfo(
+  countryCode: string,
+  status: CovidStatus
+): Promise<AxiosResponse<CountrySummaryResponse>> {
   // status params: confirmed, recovered, deaths
   const url = `https://api.covid19api.com/country/${countryCode}/status/${status}`;
   return axios.get(url);
@@ -175,10 +188,11 @@ async function setupData() {
   setLastUpdatedTimestamp(data);
 }
 
-function renderChart(data: any, labels: any) {
-  const ctx = $('#lineChart').getContext('2d');
+function renderChart(data: number[], labels: string[]) {
+  const ctx = ($('#lineChart') as HTMLCanvasElement).getContext('2d');
   Chart.defaults.color = '#f5eaea';
-  Chart.defaults.font.family = 'Exo 2';
+  Chart.defaults.font = 'Exo 2';
+  // Chart.defaults.font.family = 'Exo 2';
   new Chart(ctx, {
     type: 'line',
     data: {
@@ -189,6 +203,7 @@ function renderChart(data: any, labels: any) {
           backgroundColor: '#feb72b',
           borderColor: '#feb72b',
           data,
+          fill: true,
         },
       ],
     },
@@ -206,7 +221,7 @@ function setChartData(data: any) {
   renderChart(chartData, chartLabel);
 }
 
-function setTotalConfirmedNumber(data: any) {
+function setTotalConfirmedNumber(data: CovideSummaryResonse) {
   confirmedTotal.innerText = data.Countries.reduce(
     (total: any, current: any) => (total += current.TotalConfirmed),
     0
