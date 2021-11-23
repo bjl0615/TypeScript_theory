@@ -20,8 +20,6 @@
 - [Postman API](https://documenter.getpostman.com/view/10808728/SzS8rjbc?version=latest#27454960-ea1c-4b91-a0b6-0468bb4e6712)
 - [Type Vue without Typescript](https://blog.usejournal.com/type-vue-without-typescript-b2b49210f0b)
 
-https://github.com/bjl0615/TypeScript_theory/blob/main/COVID-19/ezgif.com-gif-maker%20(4).gif
-
 # 코로나 세계 현황판 만들기
 # 🔊 Table of Contents
 
@@ -38,10 +36,10 @@ https://github.com/bjl0615/TypeScript_theory/blob/main/COVID-19/ezgif.com-gif-ma
 ### 👟tool to run
 
 Development Environment Version
-node.js -v14.17.5  
-npm -v 6.14.14
-Visual Studio code -v 1.57  
-git -v 2.32.0.window.1
+- node.js -v14.17.5  
+- npm -v 6.14.14
+- Visual Studio code -v 1.57  
+- git -v 2.32.0.window.1
 
 ```sh
 $ npm i
@@ -61,7 +59,7 @@ $ npm run build
 
 ### 📖Web Link
 
-:school:[`inflearn`]("https://www.inflearn.com/course/%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8B%A4%EC%A0%84/dashboard")
+:school: [`inflearn`]("https://www.inflearn.com")
 
 ### 🌏Web Support
 
